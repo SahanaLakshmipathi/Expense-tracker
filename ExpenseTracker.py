@@ -9,7 +9,7 @@ def main():# i am using this  to run only this specific function instead of runn
     budget = 10000# lets say company budget permonth
     user_input = add_expense() # getting input for expense.
     save_expense(user_input,file_path)#write and save expense
-    summarize_expense(file_path,budget)
+    summarize_expense(file_path, budget)
 
 def add_expense():
     print(f'📊Getting expense details')
@@ -44,32 +44,32 @@ def save_expense(user_input: EmployeeDetails,file_path): # to get the class deta
 def summarize_expense(file_path,budget):
     print(F"Summarizing expense details")
     total: list[EmployeeDetails] = []
-    with open(file_path,"r") as f:
+    with open(file_path, "r") as f:
         lines = f.readlines()# its creating space between each lines so need to use strip method and split to avoid extra lines in between
         for line in lines:#here i need to mention expense details .  in def add expenses so that i can get the variables else it wil through the error
-           expense_name,expense_id,expense_category,expense_amount = line.strip().split(",")
-           line_expense = EmployeeDetails(name=expense_name, id=expense_id,category=expense_category,amount=float(expense_amount))
-           total.append(line_expense)
+            expense_name, expense_id, expense_category, expense_amount = line.strip().split(",")
+            line_expense = EmployeeDetails(name=expense_name, id=expense_id,category=expense_category,amount=float(expense_amount))
+            total.append(line_expense)
 
-    amount_category_wise ={}# now i need all the expense in category wise so creating dict
+    amount_category_wise = {}# now i need all the expense in category wise so creating dict
     for expense in total:# here expense is not recognizing with the details so we added 'list' option in line 47 to work
-        x = expense.category # here x represents key word
+        x = expense.category# here x represents key word
         if x in amount_category_wise:# we need to make sure key word is exists in category so using if functino
             amount_category_wise[x] += expense.amount ## indicating category value if it exists then amt will get added
         else:
             amount_category_wise[x] = expense.amount# if in case its not mentioned this create new entry .
         #   here key is category and value is total amount.
         # here to print the category details in nice looking way doing looping
-        print("Expense information by category")
-        for x,amount in amount_category_wise.items():
-            print(f"{x}: €{amount:}")
+    print("Expense information by category")
+    for x, amount in amount_category_wise.items():
+        print(f"{x}: €{amount:}")
  #finally need to check for the final budget how much amount is left we team after all the deductions so we are summarizing that as well
-        TotalSpent = sum([expense.amount for expense in total])# its sums all the variables of expense in one line under totalspend.
-        print(f"💶Total amount spent : €{TotalSpent: .2f} ")
+    TotalSpent = sum([expense.amount for expense in total])# its sums all the variables of expense in one line under totalspend.
+    print(f"💶Total amount spent : €{TotalSpent: .2f} ")
 
 # now to get the remaining budget after total amount spent
-        surplus = budget - TotalSpent
-        print(yellow(f"📉Remaining budget for the month: €{surplus: .2f}"))
+    surplus = budget - TotalSpent
+    print(yellow(f"📉Remaining budget for the month: €{surplus: .2f}"))
 
 # to get the no of days in a present month and current date and remaining days .imported calender and date/time file
     now = datetime.datetime.now()
@@ -82,6 +82,7 @@ def summarize_expense(file_path,budget):
 # if  Total expense goes to -ve then we need to send a warning message
     if TotalSpent > budget:
         print(red(f"📉⚠︎Total expenses is more than a given budget."))
+
 # preparing bar chart with this
     categories = list(amount_category_wise.keys())
     amounts = list(amount_category_wise.values())
