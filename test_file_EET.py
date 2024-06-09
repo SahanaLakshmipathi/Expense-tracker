@@ -1,7 +1,7 @@
 from Employee import EmployeeDetails
-from ExpenseTracker import main, add_expense, save_expense
+from ExpenseTracker import add_expense, save_expense
 import unittest
-from unittest.mock import patch, mock_open
+from unittest.mock import patch
 
 import os
 
@@ -15,7 +15,7 @@ class TestEmployeeExpenseTracker(unittest.TestCase):
         self.assertEqual(expense.amount, 100)
         self.assertEqual(expense.category, 'Travel')
 
-#invalid test case results
+#invalid test case results(If in case category number is not
     @patch('builtins.input', side_effect=['ABC', '321', '100','9', '1'])
     def test_add_expense_invalid_category(self, mock_input):
         expense = add_expense()
@@ -23,6 +23,7 @@ class TestEmployeeExpenseTracker(unittest.TestCase):
         self.assertEqual(expense.employee_ID, '321')
         self.assertEqual(expense.amount, 100)
         self.assertEqual(expense.category, 'Travel')
+
 
 
     def test_save_expense(self):
@@ -33,8 +34,6 @@ class TestEmployeeExpenseTracker(unittest.TestCase):
         file_exists = os.path.exists('test_expenses.csv')
         self.assertTrue(file_exists)
 
-        # Optionally, you can delete the temporary file after the test
-        # os.remove('test_expenses.csv')
 
 if __name__ == "__main__":
     unittest.main()
