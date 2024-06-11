@@ -1,7 +1,5 @@
 from Employee import EmployeeDetails
 import matplotlib.pyplot as plt
-import calendar
-import datetime
 
 def main():# i am using this  to run only this specific function instead of running it whole.
     print(f'🎰Running employee expense tracker!')
@@ -74,14 +72,6 @@ def summarize_expense(file_path,budget):
 # now to get the remaining budget after total amount spent
     surplus = budget - TotalSpent
     print(yellow(f"📉Remaining budget for the month: €{surplus: .2f}"))
-
-# to get the no of days in a present month and current date and remaining days .imported calender and date/time file
-    now = datetime.datetime.now()
-    days_in_month = calendar.monthrange(now.year, now.month)[1]
-    remaining_days = days_in_month - now.day
-
-    daily_budget = surplus / remaining_days
-    print(green(f"📊👉 Budget Per Day: €{daily_budget:.2f}"))
 
 # if  Total expense goes to -ve then we need to send a warning message
     if TotalSpent > budget:
