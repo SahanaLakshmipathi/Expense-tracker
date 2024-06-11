@@ -45,7 +45,7 @@ def save_expense(user_input: EmployeeDetails,file_path): # to get the class deta
     with open(file_path,"a") as f:
         f.write(f"{user_input.name},{user_input.employee_ID},{user_input.category},{user_input.amount}\n")
 
-def summarize_expense(file_path,budget, plot=True):# added plot here to avoid interfering of matplotlib in test file
+def summarize_expense(file_path,budget):# added plot here to avoid interfering of matplotlib in test file
     print(F"Summarizing expense details")
     total: list[EmployeeDetails] = []
     with open(file_path, "r") as f:
@@ -88,18 +88,18 @@ def summarize_expense(file_path,budget, plot=True):# added plot here to avoid in
         print(red(f"📉⚠︎Total expenses is more than a given budget."))
 
 # preparing bar chart with this
-    if plot: # also using if to avoid getting error in test file
-        categories = list(amount_category_wise.keys())
-        amounts = list(amount_category_wise.values())
+   
+    categories = list(amount_category_wise.keys())
+    amounts = list(amount_category_wise.values())
 
-        plt.figure(figsize=(8,5))
-        plt.bar(categories, amounts,  color="yellow")
-        plt.xlabel("Expense Category")
-        plt.ylabel("Amount (€)")
-        plt.title("Employees Expense summery")
-        plt.xticks(rotation=45, ha='right')
-        plt.tight_layout()
-        plt.show()
+    plt.figure(figsize=(8,5))
+    plt.bar(categories, amounts,  color="yellow")
+    plt.xlabel("Expense Category")
+    plt.ylabel("Amount (€)")
+    plt.title("Employees Expense summery")
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    plt.show()
 
 # just to get the main lines in different colour using below def
 def green(text):
