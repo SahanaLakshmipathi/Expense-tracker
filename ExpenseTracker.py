@@ -30,7 +30,7 @@ def add_expense():
             select_index = int(input(f"⌖Enter a category number{value_range}: "))-1
         # now creating if statement to make sure person is selecting within the range
             if select_index in range(len(enter_category)):
-            # i have imported class from expense.py however category is not selected yet so creating new variable to get it as we have only expense category and select index
+            # i have imported class from employee.py however category is not selected yet so creating new variable to get it as we have only expense category and select index
                updated_category = enter_category[select_index]
                updated_expense = EmployeeDetails(name=enter_name,id=enter_employee_id,category=updated_category,amount=enter_amount)
                return updated_expense
@@ -45,7 +45,7 @@ def save_expense(user_input: EmployeeDetails,file_path): # to get the class deta
     with open(file_path,"a") as f:
         f.write(f"{user_input.name},{user_input.employee_ID},{user_input.category},{user_input.amount}\n")
 
-def summarize_expense(file_path,budget):# added plot here to avoid interfering of matplotlib in test file
+def summarize_expense(file_path,budget):
     print(F"Summarizing expense details")
     total: list[EmployeeDetails] = []
     with open(file_path, "r") as f:
