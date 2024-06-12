@@ -1,5 +1,4 @@
-from Employee import EmployeeDetails
-from ExpenseTracker import add_expense, save_expense
+from ExpenseTracker import add_expense, save_expense, EmployeeDetails
 import unittest
 from unittest.mock import patch
 
